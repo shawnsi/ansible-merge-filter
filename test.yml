@@ -1,0 +1,30 @@
+---
+- hosts: localhost
+  connection: local
+  gather_facts: no
+  vars:
+    one:
+      a: 1
+      b: 2
+      c:
+        d: 3
+    two:
+      a: 1
+      c:
+        d: 1
+        e: 4
+
+  tasks:
+    - name: Create merged variable
+      set_fact: m="{{ one | merge(two) }}"
+
+    - name: Deubg one
+      debug: var=one
+
+    - name: Deubg two
+      debug: var=two
+
+    - name: Deubg m
+      debug: var=m
+
+# vim: set ft=ansible:

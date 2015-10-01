@@ -1,16 +1,24 @@
+from collections import defaultdict
 
-def merge(a, b):
-    for key in b:
-        if key in a:
-            if isinstance(b[key], dict):
-                a[key] = merge(a[key], b[key])
-            else:
-                a[key] = a[key] + b[key]
 
+def merge(*args):
+    flat = defaultdict(list)
+
+    for hash in args:
+        for key in hash:
+            flat[key].append(hash[key])
+
+    merged = {}
+
+    for key in flat:
+        dict_instances = [isinstance(v, dict) for v in flat[key]]
+
+        if any(dict_instances):
+            merged[key] = merge(*flat[key])
         else:
-            a[key] = b[key]
+            merged[key] = sum(flat[key])
 
-    return a
+    return merged
 
 
 class FilterModule(object):

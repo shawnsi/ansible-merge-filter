@@ -1,6 +1,14 @@
 from collections import defaultdict
 
 
+def merge_sum(iterable):
+    start = 0
+
+    if isinstance(iterable[0], list):
+        start = []
+
+    return sum(iterable, start)
+
 def merge(*args):
     flat = defaultdict(list)
 
@@ -16,7 +24,7 @@ def merge(*args):
         if any(dict_instances):
             merged[key] = merge(*flat[key])
         else:
-            merged[key] = sum(flat[key])
+            merged[key] = merge_sum(flat[key])
 
     return merged
 

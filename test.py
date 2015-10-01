@@ -37,7 +37,7 @@ class TestMerge(unittest.TestCase):
     def test_sum_lists(self):
         a, b = {'foo': [1]}, {'foo': [1]}
         merged = merge(a, b)
-        self.assertDictEqual(merge, {'foo': [1, 1]})
+        self.assertDictEqual(merged, {'foo': [1, 1]})
 
 # vim: tabstop=4 expandtab shiftwidth=4 softtabstop=4
 
